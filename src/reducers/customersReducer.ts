@@ -2,20 +2,27 @@ import {
   CREATE_CUSTOMER,
   RETRIEVE_CUSTOMERS,
   UPDATE_CUSTOMER,
+  GET_CUSTOMER,
   DELETE_CUSTOMER,
 } from "../actions/type";
+import initialState from "./initialState";
+import {ICustomer} from "../components/Home"
 
-const initialState: any = [];
-
-function customers(customers = initialState, action: any) {
+function customersReducer(customers: ICustomer[] = initialState.customers, action: any) {
   const { type, payload } = action;
 
   switch (type) {
     case CREATE_CUSTOMER:
       return [...customers, payload];
 
-    case RETRIEVE_CUSTOMERS:
+    case RETRIEVE_CUSTOMERS:{
       return payload;
+    }
+
+    case GET_CUSTOMER:{
+      return customers.filter((customer: any) => customer.id === payload.id)
+    }
+      
 
     case UPDATE_CUSTOMER:
       return customers.map((customer: any) => {
@@ -37,4 +44,4 @@ function customers(customers = initialState, action: any) {
   }
 }
 
-export default customers;
+export default customersReducer;

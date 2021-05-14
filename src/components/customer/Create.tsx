@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { connect } from "react-redux";
 import { RouteComponentProps } from "react-router-dom";
-import { createCustomer } from "../../actions/customers";
+import { createCustomer } from "../../actions/customersAction";
 
 export interface IValues {
   first_name: string;
@@ -16,12 +16,14 @@ export interface IFormState extends RouteComponentProps {
   values: IValues[];
   submitSuccess: boolean;
   loading: boolean;
+  createCustomer: (customer: IValues) => void;
 }
 
 const Create: React.FC<IFormState> = ({
   key,
   values,
   loading,
+  createCustomer,
   submitSuccess,
   history,
 }) => {
@@ -35,19 +37,9 @@ const Create: React.FC<IFormState> = ({
   };
   const [customer, setCustomer] = useState(initialCustomerState);
   const [loadings, setLoading] = useState(false);
-  const dispatch = useDispatch();
 
   const processFormSubmission = () => {
-    dispatch(
-      createCustomer(
-        customer.first_name,
-        customer.last_name,
-        customer.email,
-        customer.phone,
-        customer.address,
-        customer.description
-      )
-    );
+    createCustomer(customer);
     setLoading(true);
     history.push("/");
   };
@@ -153,4 +145,16 @@ const Create: React.FC<IFormState> = ({
   );
 };
 
-export default Create;
+const mapStateToProps = (state: any) => {
+  return { customers: state.customersReducer };
+};
+
+const mapDispatchToProps = (dispatch: any) => {
+  return {
+    createCustomer: (customer: IValues) => {
+      dispatch(createCustomer(customer));
+    },
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Create);

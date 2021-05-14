@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
+import { connect } from "react-redux";
 import { Link, RouteComponentProps } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { retrieveCustomers, deleteCustomer } from "../actions/customers";
-import CustomerService from "../services/CustomerService";
+import { retrieveCustomers, deleteCustomer } from "../actions/customersAction";
 
-interface ICustomer {
+export interface ICustomer {
   id: number;
   first_name: string;
   last_name: string;
@@ -16,43 +15,23 @@ interface ICustomer {
 
 interface IState extends RouteComponentProps {
   customers: ICustomer[];
+  retrieveCustomers: () => void;
+  deleteCustomer: (id: number) => void;
 }
 
-const Home: React.FC<IState> = ({ customers, history }) => {
-  const [custs, setCustomers] = useState<ICustomer[]>();
-
-  const getCustomers = () => {
-    CustomerService.getAll()
-      .then((response) => {
-        setCustomers(response.data);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-  };
-
-  const removeCustomer = (id: number) => {
-    CustomerService.remove(id)
-      .then((response) => {})
-      .catch((e) => {
-        console.log(e);
-      });
-  };
+const Home: React.FC<IState> = ({
+  customers,
+  retrieveCustomers,
+  deleteCustomer,
+  history,
+}) => {
   useEffect(() => {
-    getCustomers();
+    retrieveCustomers();
   }, []);
 
-  const deleteCustomer = (id: number) => {
-    removeCustomer(id);
-    if (custs) {
-      const index = custs.findIndex((customer) => customer.id === id);
-      custs.splice(index, 1);
-      history.push("/");
-    }
-  };
   return (
     <div>
-      {custs && custs.length === 0 && (
+      {customers && customers.length === 0 && (
         <div className="text-center">
           <h2>No customer found at the moment</h2>
         </div>
@@ -72,8 +51,8 @@ const Home: React.FC<IState> = ({ customers, history }) => {
               </tr>
             </thead>
             <tbody>
-              {custs &&
-                custs.map((customer) => (
+              {customers &&
+                customers.map((customer) => (
                   <tr key={customer.id}>
                     <td>{customer.first_name}</td>
                     <td>{customer.last_name}</td>
@@ -112,4 +91,19 @@ const Home: React.FC<IState> = ({ customers, history }) => {
   );
 };
 
-export default Home;
+const mapStateToProps = (state: any) => {
+  return { customers: state.customersReducer };
+};
+
+const mapDispatchToProps = (dispatch: any) => {
+  return {
+    retrieveCustomers: () => {
+      dispatch(retrieveCustomers());
+    },
+    deleteCustomer: (id: number) => {
+      dispatch(deleteCustomer(id));
+    },
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

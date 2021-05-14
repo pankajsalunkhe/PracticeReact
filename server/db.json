@@ -14,36 +14,27 @@
       "first_name": "Customer_2",
       "last_name": "Customer_2",
       "email": "customer2@mail.com",
-      "phone": "00000000000",
+      "phone": "000000000001",
       "address": "Customer_2 Adress",
       "description": "Customer_2 Description"
     },
     {
       "first_name": "pankaj",
-      "last_name": "salunkhe",
-      "email": "3pansalunkhe@gmail.com",
-      "phone": "lo343242",
-      "address": "gadadsadas",
-      "description": "auodsdasdasdasdsad",
+      "last_name": "sssalunkhe",
+      "email": "6pansalunkhe@gmail.com",
+      "phone": "lo34324238888",
+      "address": "gadadsadas8888",
+      "description": "auodsdasdasdasdsad88888",
       "id": 3
     },
     {
-      "first_name": "1pankaj",
-      "last_name": "2salunkhe",
-      "email": "",
-      "phone": "",
-      "address": "",
-      "description": "",
+      "first_name": "Hello",
+      "last_name": "Helloone",
+      "email": "Hello",
+      "phone": "Hello",
+      "address": "Hello",
+      "description": "Hellopankaj",
       "id": 4
-    },
-    {
-      "first_name": "pankaj",
-      "last_name": "kzsalunkhe",
-      "email": "",
-      "phone": "",
-      "address": "",
-      "description": "",
-      "id": 5
     }
   ]
 }

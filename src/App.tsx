@@ -9,7 +9,7 @@ import {
 } from "react-router-dom";
 import Home from "./components/Home";
 import Create from "./components/customer/Create";
-import EditCustomer from "./components/customer/Edit";
+import Edit from "./components/customer/Edit";
 
 const App: React.FC<RouteComponentProps<any>> = ({}) => {
   return (
@@ -27,7 +27,7 @@ const App: React.FC<RouteComponentProps<any>> = ({}) => {
       <Switch>
         <Route path={"/"} exact component={Home} />
         <Route path={"/create"} exact component={Create} />
-        <Route path={"/edit/:id"} exact component={EditCustomer} />
+        <Route path={"/edit/:id"} exact component={Edit} />
       </Switch>
     </div>
   );
