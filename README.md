@@ -31,6 +31,17 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 
 ### `npm run eject`
 
+#############################################################################################
+1) To run json server on node command prompt:
+
+### `npm json-server --watch server/db.json`
+
+2) And you have to start the project in terminal of visual studio code: 
+### `npm start`
+
+Note: Both command should in running stage you can open two node commmand prompt first to run json server and second to run project. 
+###########################################################################333
+
 **Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
 If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
